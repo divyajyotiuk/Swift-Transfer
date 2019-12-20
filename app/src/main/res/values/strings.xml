@@ -1,0 +1,23 @@
+<resources>
+    <string name="app_name">Practice</string>
+    <string name="quote">moving money for better</string>
+
+    <string-array name="bank">
+        <item>HDFC</item>
+        <item>SBI</item>
+        <item>Other</item>
+    </string-array>
+
+    <string-array name="currency">
+        <item>Rupees</item>
+        <item>Dollar</item>
+        <item>Yen</item>
+    </string-array>
+
+
+    <string-array name="id_proof">
+        <item>Aadhar Card</item>
+        <item>Pan Card</item>
+        <item>Other</item>
+    </string-array>
+</resources>

@@ -1,0 +1,28 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.MaterialComponents.NoActionBar">
+<item name="android:statusBarColor">@color/darkBackground</item>
+        <item name="colorPrimary">@color/yellow_500</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/yellow_500</item>
+        <item name="colorSurface">@color/surfaceColor</item>
+    </style>
+
+
+    <style name="NumPinText">
+        <item name="android:background">?selectableItemBackgroundBorderless</item>
+        <item name="android:textColor">?android:textColorPrimary</item>
+        <item name="android:paddingTop">16dp</item>
+        <item name="android:paddingBottom">16dp</item>
+        <item name="android:textAlignment">center</item>
+<item name="android:textSize">30sp</item>
+    </style>
+
+
+<style name="AppTheme.Home">
+    <item name="colorPrimary">@color/yellow_500</item>
+    <item name="android:colorBackground">@color/darkBackground</item>
+</style>
+
+</resources>

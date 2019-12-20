@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    android:gravity="center"
+    android:layout_gravity="center"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+<TextView
+android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
+    android:textStyle="bold"
+    android:text="TOTAL BALANCE"
+    android:textColor="?android:textColorSecondary"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"/>
+    <TextView
+        android:id="@+id/balance"
+        android:textAppearance="@style/TextAppearance.MaterialComponents.Headline5"
+        android:textSize="28sp"
+        android:fontFamily="monospace"
+        android:textColor="?android:textColorPrimary"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+</LinearLayout>

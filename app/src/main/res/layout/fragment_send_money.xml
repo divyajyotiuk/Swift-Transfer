@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+  >
+
+    <ImageView
+        android:rotation="90"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:src="@drawable/ic_dots"
+        android:layout_width="144dp"
+        android:layout_height="144dp"/>
+
+<androidx.constraintlayout.widget.Guideline
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    app:layout_constraintGuide_begin="16dp"
+    android:id="@+id/guideline_start"
+    />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_end="16dp"
+        android:id="@+id/guideline_end"
+        />
+    <TextView
+        app:layout_constraintStart_toStartOf="@id/guideline_start"
+        app:layout_constraintTop_toTopOf="parent"
+        android:id="@+id/tv_send_money"
+        android:letterSpacing="0.01"
+        android:layout_marginTop="48dp"
+        android:textAppearance="@style/TextAppearance.MaterialComponents.Headline5"
+        android:textSize="32sp"
+        android:text="Send Money"
+        android:fontFamily="sans-serif-black"
+        android:textColor="?android:textColorPrimary"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/amountTextInputLayout"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        app:layout_constraintStart_toStartOf="@id/guideline_start"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="@id/guideline_end"
+        android:hint="Enter Amount"
+        android:layout_marginTop="32dp"
+        app:layout_constraintTop_toBottomOf="@id/tv_send_money">
+
+        <com.google.android.material.textfield.TextInputEditText
+           android:id="@+id/et_amount"
+            android:inputType="numberDecimal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/conversionTextInputLayout"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+        app:layout_constraintStart_toStartOf="@id/guideline_start"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="@id/guideline_end"
+        android:layout_marginTop="32dp"
+        android:hint="Conversion"
+        app:layout_constraintTop_toBottomOf="@id/amountTextInputLayout">
+
+        <com.google.android.material.textview.MaterialAutoCompleteTextView
+            android:layout_width="match_parent"
+            android:id="@+id/actv_conversion"
+            android:layout_height="wrap_content" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.codebreak.bank.TouchDisabledTextInputLayout
+        android:id="@+id/finalTextInputLayout"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        app:layout_constraintStart_toStartOf="@id/guideline_start"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="@id/guideline_end"
+        android:layout_marginTop="32dp"
+        android:hint="Final Amount"
+        app:layout_constraintTop_toBottomOf="@id/conversionTextInputLayout">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/et_final_amount"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </com.codebreak.bank.TouchDisabledTextInputLayout>
+
+  
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/done"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+
+        android:text="DONE"
+        app:layout_constraintEnd_toEndOf="@id/guideline_end"
+        app:layout_constraintTop_toBottomOf="@id/parent_contact" />
+
+    <LinearLayout
+        android:background="#212121"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp"
+        android:orientation="horizontal"
+        android:id="@+id/parent_contact"
+        app:layout_constraintTop_toBottomOf="@id/finalTextInputLayout"
+        android:layout_marginTop="36dp"
+        android:paddingTop="36dp"
+
+        android:paddingBottom="32dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <com.google.android.material.textfield.TextInputLayout
+            app:layout_constraintEnd_toStartOf="@id/btn_contacts"
+            android:id="@+id/contactTextInputLayout"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:hint="Enter Contact/ID"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/finalTextInputLayout">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:id="@+id/et_user_id"
+                android:layout_height="wrap_content" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+
+        <ImageView
+            android:layout_gravity="center_vertical"
+            android:src="@drawable/ic_contacts"
+            android:id="@+id/btn_contacts"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="@id/contactTextInputLayout"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintTop_toTopOf="@id/contactTextInputLayout" />
+    </LinearLayout>
+    
+   
+</androidx.constraintlayout.widget.ConstraintLayout>

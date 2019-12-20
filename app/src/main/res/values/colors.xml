@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#008577</color>
+    <color name="colorPrimaryDark">#00574B</color>
+    <color name="colorAccent">#D81B60</color>
+
+<!--    <color name="yellow_500">#ffeb3b</color>-->
+    <color name="yellow_500">#ffc72a</color>
+
+    <color name="darkBackground">#121212</color>
+    <color name="surfaceColor">#171717</color>
+</resources>
