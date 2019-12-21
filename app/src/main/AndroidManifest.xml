@@ -10,26 +10,22 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".TransactionHistoryActivity"></activity>
-        <activity android:name=".KYCActivity"></activity>
-        <activity android:name=".MainActivity">
-
-        </activity>
+        <activity android:name=".ContractCall"></activity>
+        <activity android:name=".CreateWallet" />
+        <activity android:name=".ImportWallet" />
+        <activity android:name=".TransactionHistoryActivity" />
+        <activity android:name=".KYCActivity" />
+        <activity android:name=".MainActivity" />
         <activity android:name=".SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
         </activity>
         <activity android:name=".SendMoneyActivity" />
-        <activity android:name=".PinActivity">
-
-        </activity>
-<activity android:name=".SetPinActivity">
-
-</activity>
+        <activity android:name=".PinActivity" />
+        <activity android:name=".SetPinActivity" />
     </application>
 
 </manifest>

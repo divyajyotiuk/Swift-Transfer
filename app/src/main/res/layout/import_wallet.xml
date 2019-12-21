@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ImportWallet">
+
+    <EditText
+        android:id="@+id/address"
+        android:layout_width="219dp"
+        android:layout_height="86dp"
+        android:text="Enter Address"
+        android:textColor="@color/yellow"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.193">
+
+    </EditText>
+
+    <EditText
+        android:id="@+id/private_key"
+        android:layout_width="218dp"
+        android:layout_height="93dp"
+        android:text="Enter private key"
+        android:textColor="@color/yellow"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/address"
+        app:layout_constraintVertical_bias="0.133">
+
+    </EditText>
+
+    <Button
+        android:id="@+id/import_wallet_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Import Wallet"
+        android:onClick="clickImport"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/private_key"
+        app:layout_constraintVertical_bias="0.185"></Button>
+
+    <TextView
+        android:id="@+id/create_wallet"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:clickable="true"
+        android:onClick="clickCreate"
+        android:textColor="@color/yellow"
+        android:text="Don't have one? Create Wallet."
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/import_wallet_btn"
+        app:layout_constraintVertical_bias="0.209"></TextView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
