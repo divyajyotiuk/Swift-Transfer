@@ -77,6 +77,8 @@
         <com.google.android.material.textview.MaterialAutoCompleteTextView
             android:layout_width="match_parent"
             android:id="@+id/actv_conversion"
+            android:focusableInTouchMode="false"
+            android:editable="false"
             android:layout_height="wrap_content" />
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -152,6 +154,6 @@
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintTop_toTopOf="@id/contactTextInputLayout" />
     </LinearLayout>
-    
-   
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -20,4 +20,10 @@
         <item>Pan Card</item>
         <item>Other</item>
     </string-array>
+
+    <string-array name="add_money">
+        <item>from bank</item>
+        <item>to bank</item>
+    </string-array>
+
 </resources>

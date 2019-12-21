@@ -49,7 +49,7 @@ public class TransactionListAdapter extends FirebaseRecyclerAdapter<TxnList, Tra
 
         if(transaction.isMoneyAdded())
         {
-            name = transaction.getSenderName();
+            name = transaction.getReceiverName();
             amount = String.format("+%s", transaction.getAmount());
 
             transactionViewHolder.amount.setTextColor(greenColor);
@@ -57,7 +57,7 @@ public class TransactionListAdapter extends FirebaseRecyclerAdapter<TxnList, Tra
         }
         else
         {
-            name = transaction.getReceiverName();
+            name = transaction.getSenderName();
             transactionViewHolder.amount.setTextColor(redColor);
             amount = String.format("-%s", transaction.getAmount());
         }
