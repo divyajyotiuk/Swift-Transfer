@@ -41,6 +41,7 @@ public class KYCActivity extends AppCompatActivity {
     private ArrayAdapter<String> bankAdapter, idProofAdapter;
     private FirebaseDatabase secondaryDatabase;
     private DatabaseReference secondaryRef;
+    private String phoneNo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -82,24 +83,25 @@ public class KYCActivity extends AppCompatActivity {
                 infoParent.setVisibility(View.GONE);
                 progressParent.setVisibility(View.VISIBLE);
                 progressText.setText("Checking with bank");
-
+                phoneNo = FirebaseAuth.getInstance().getCurrentUser().getPhoneNumber();
                 secondaryRef.addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                         int flag = 0;
                         for (DataSnapshot dataSnapshot1 : dataSnapshot.getChildren())
                         {
-                            if(dataSnapshot1.child("phoneNo").getValue().toString().equals(FirebaseAuth.getInstance().getCurrentUser().getPhoneNumber()))
+                            if(dataSnapshot1.child("phoneNo").getValue().toString().equals(phoneNo) && dataSnapshot1.child("bankName").getValue().toString().equals(bank))
                             {
+
                                 progressText.setText("Storing the information");
                                 User user = new User();
-                                String phoneNo = FirebaseAuth.getInstance().getCurrentUser().getPhoneNumber();
                                 String countryCode = PhoneUtils.getCountryIsoForCountryCode(PhoneUtils.getCountryCodeForPhoneNumber(phoneNo));
                                 user.setData(phoneNo,countryCode,idProofType,bank,idProofNo.getText().toString(),getCurrencyCode(countryCode));
                                 user.setFullName(dataSnapshot1.child("name").getValue().toString());
+                                user.generateUserID();
                                 DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference().child("WUAccount");
                                 databaseReference.child(FirebaseAuth.getInstance().getCurrentUser().getUid()).setValue(user);
-                                startActivity(new Intent(KYCActivity.this, MainActivity.class));
+                                startActivity(new Intent(KYCActivity.this, SetPinActivity.class));
                                 finish();
                                 flag=1;
                                 break;

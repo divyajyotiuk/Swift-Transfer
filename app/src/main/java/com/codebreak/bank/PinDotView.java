@@ -72,6 +72,11 @@ public class PinDotView extends View {
         invalidate();
     }
 
+    public void unFillAll()
+    {
+        this.fillCount=0;
+        invalidate();
+    }
 
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {

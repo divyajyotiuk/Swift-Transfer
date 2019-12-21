@@ -71,6 +71,16 @@ public class NumPinView extends ConstraintLayout implements View.OnClickListener
         this.listener = listener;
     }
 
+    public int[] getPin() {
+        return pin;
+    }
+
+    public void clearPin()
+    {
+        pin = new int[4];
+        count=0;
+    }
+
     @Override
     public void onClick(View v) {
         if(shouldDisablePin)

@@ -9,4 +9,34 @@
 
     <color name="darkBackground">#121212</color>
     <color name="surfaceColor">#171717</color>
+
+
+
+
+    <color name="green">#5eaa46</color>
+    <color name="timestamp">#b3ffffff</color>
+    <color name="darkblue">#5e97f6</color>
+    <color name="yellow">#fdd835</color>
+    <color name="orange">#ffa625</color>
+    <color name="blue">#27b5f5</color>
+    <color name="purple">#9575cd</color>
+    <color name="greeen">#d4e157</color>
+    <color name="midgreen">#689f38</color>
+    <color name="darkgreen">#00897b</color>
+    <color name="pink">#ff6742</color>
+    <color name="lime">#cbfc59</color>
+    <color name="bblue">#58c0fc</color>
+
+
+    <array name="colors">
+        <item>@color/darkblue</item>
+        <item>@color/blue</item>
+        <item>@color/orange</item>
+        <item>@color/pink</item>
+        <item>@color/midgreen</item>
+        <item>@color/purple</item>
+        <item>@color/darkgreen</item>
+        <item>@color/bblue</item>
+    </array>
+
 </resources>

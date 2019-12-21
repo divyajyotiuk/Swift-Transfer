@@ -34,15 +34,22 @@ public class SplashActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         root = findViewById(android.R.id.content);
-        IdpConfig phoneConfigWithDefaultNumber = new IdpConfig.PhoneBuilder()
-                .setDefaultCountryIso("in")
-                .build();
-        startActivityForResult(
-                AuthUI.getInstance()
-                        .createSignInIntentBuilder()
-                        .setAvailableProviders(Arrays.asList(phoneConfigWithDefaultNumber))
-                        .setIsSmartLockEnabled(!BuildConfig.DEBUG /* credentials */, true /* hints */).setTheme(R.style.AppTheme).build(),
-                RC_SIGN_IN);
+
+        if(FirebaseAuth.getInstance().getCurrentUser()!=null) {
+            startActivity(new Intent(this, PinActivity.class));
+            finish();
+        }
+        else {
+            IdpConfig phoneConfigWithDefaultNumber = new IdpConfig.PhoneBuilder()
+                    .setDefaultCountryIso("in")
+                    .build();
+            startActivityForResult(
+                    AuthUI.getInstance()
+                            .createSignInIntentBuilder()
+                            .setAvailableProviders(Arrays.asList(phoneConfigWithDefaultNumber))
+                            .setIsSmartLockEnabled(!BuildConfig.DEBUG /* credentials */, true /* hints */).setTheme(R.style.AppTheme).build(),
+                    RC_SIGN_IN);
+        }
     }
 
     @Override
@@ -74,7 +81,7 @@ public class SplashActivity extends AppCompatActivity {
                             finish();
                         }
                         else {
-                            startActivity(new Intent(SplashActivity.this, KYCActivity.class));
+                            startActivity(new Intent(SplashActivity.this, PinActivity.class));
                             finish();
                         }
                         }

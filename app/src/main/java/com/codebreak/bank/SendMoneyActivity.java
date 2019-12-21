@@ -11,6 +11,7 @@ import com.codebreak.bank.model.TxnList;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.textfield.TextInputEditText;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -57,8 +58,8 @@ public class SendMoneyActivity extends AppCompatActivity {
         actvConversion.setAdapter(conversionAdapter);
         dialog = new ProgressDialog(this);
         databaseReference = FirebaseDatabase.getInstance().getReference().child("WUAccount");
-//        uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
-        uid = "g0gBLPFJLwYr4gFMeGzVEiEPEPn1";
+        uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
+//        uid = "g0gBLPFJLwYr4gFMeGzVEiEPEPn1";
         btnDone.setOnClickListener(new View.OnClickListener() {
 
             @Override
@@ -74,7 +75,7 @@ public class SendMoneyActivity extends AppCompatActivity {
                        if(senderBalance>=amountToSend)
                        {
                             databaseReference.child(uid).child("walletBalance").setValue(Math.round((senderBalance-amountToSend) * 100.0) / 100.0);
-                            sendMoneyToReceiver(senderId, amountToSend);
+                            sendMoneyToReceiver(data.child("fullName").getValue().toString(), data.getKey(), senderId, amountToSend);
                        }
                        else
                        {
@@ -95,7 +96,7 @@ public class SendMoneyActivity extends AppCompatActivity {
 
     }
 
-    private void sendMoneyToReceiver(final String senderId, final Double amount) {
+    private void sendMoneyToReceiver(final String senderName, final String senderKey, final String senderId, final Double amount) {
         setProgress("Sending money...");
         databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -112,7 +113,7 @@ public class SendMoneyActivity extends AppCompatActivity {
                                 .child("walletBalance")
                                 .setValue(Double.valueOf(dataSnapshot1.child("walletBalance").getValue().toString())
                                 +Double.valueOf(etAmount.getText().toString()));
-                        writeTxnList(senderId, receiverId.toString(),amount,currency);
+                        writeTxnList(dataSnapshot1.child("fullName").getValue().toString(),senderName, senderId, receiverId.toString() ,senderKey, dataSnapshot1.getKey(),amount,currency);
                         showSnackbar("Money sent successfully");
                         dialog.dismiss();
                     }
@@ -139,18 +140,23 @@ public class SendMoneyActivity extends AppCompatActivity {
     }
 
 
-    public void writeTxnList(String sender, String receiver, Double amount, String receiverCurrency) {
+    public void writeTxnList(String senderName, String receiverName, String senderId, String receiverId, String senderKey, String receiverKey,  Double amount, String receiverCurrency) {
 
-        String txnKey = txnListRef.push().getKey();
+        String txnKey = txnListRef.child(senderKey).push().getKey();
         TxnList tlist = new TxnList();
+        tlist.setReceiverName(receiverName);
+        tlist.setSenderName(senderName);
         tlist.setAmount(amount);
         tlist.setCurrency(receiverCurrency);
-        tlist.setFrom(sender);
-        tlist.setTo(receiver);
+        tlist.setFrom(senderId);
+        tlist.setTo(receiverId);
         tlist.setTxnID(txnKey);
         tlist.setTime(new SimpleDateFormat("HH:mm:ss").format(new Date()));
         tlist.setDate(new SimpleDateFormat("yyyy-MM-dd").format(new Date()));
-        txnListRef.push().setValue(tlist);
+        tlist.setMoneyAdded(false);
+        txnListRef.child(senderKey).child(txnKey).setValue(tlist);
+        tlist.setMoneyAdded(true);
+        txnListRef.child(receiverKey).child(txnKey).setValue(tlist);
 //        Map<String, Object> txn = tlist.toMap();
 //
 //        Map<String, Object> childUpdates = new HashMap<>();

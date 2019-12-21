@@ -37,6 +37,7 @@ dependencies {
     annotationProcessor 'com.google.dagger:dagger-compiler:2.25.2'
     implementation 'androidx.emoji:emoji:1.0.0'
     implementation 'com.amulyakhare:com.amulyakhare.textdrawable:1.0.1'
+    implementation 'com.firebaseui:firebase-ui-database:4.3.1'
 
 }
 apply plugin: 'com.google.gms.google-services'

@@ -1,5 +1,6 @@
 package com.codebreak.bank;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.transition.TransitionManager;
 import android.view.View;
@@ -39,15 +40,18 @@ public class SetPinActivity extends AppCompatActivity {
         done.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(etPin.getText().toString()!=etConfirmPin.getText().toString())
+                if(!etPin.getText().toString().equals(etConfirmPin.getText().toString()))
                 {
-                    Snackbar.make(root, "Please enter correct PIN.", Snackbar.LENGTH_SHORT);
+                    Snackbar.make(root, "Please enter correct PIN.", Snackbar.LENGTH_SHORT).show();
                 }
                 else {
                     TransitionManager.beginDelayedTransition(progressRoot);
                     progressBar.setVisibility(View.VISIBLE);
                     done.setVisibility(View.INVISIBLE);
                     mDatabase.child("loginPass").setValue(etPin.getText().toString());
+                    Intent intent=new Intent(SetPinActivity.this, MainActivity.class);
+                    startActivity(intent);
+                    finish();
                 }
             }
         });

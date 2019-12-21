@@ -7,8 +7,9 @@ import java.util.Map;
 
 public class TxnList {
 
-    private String to,from,date,time,txnID,currency;
+    private String to,from,date,time,txnID,currency, senderName, receiverName;
     private Double amount;
+    private boolean moneyAdded;
 
     public String getTo() {
         return to;
@@ -81,4 +82,27 @@ public class TxnList {
         return result;
     }
 
+    public boolean isMoneyAdded() {
+        return moneyAdded;
+    }
+
+    public void setMoneyAdded(boolean moneyAdded) {
+        this.moneyAdded = moneyAdded;
+    }
+
+    public String getSenderName() {
+        return senderName;
+    }
+
+    public void setSenderName(String senderName) {
+        this.senderName = senderName;
+    }
+
+    public String getReceiverName() {
+        return receiverName;
+    }
+
+    public void setReceiverName(String receiverName) {
+        this.receiverName = receiverName;
+    }
 }

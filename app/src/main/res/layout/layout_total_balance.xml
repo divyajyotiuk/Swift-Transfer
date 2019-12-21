@@ -8,7 +8,7 @@
 <TextView
 android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
     android:textStyle="bold"
-    android:text="TOTAL BALANCE"
+    android:text="WALLET BALANCE"
     android:textColor="?android:textColorSecondary"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"/>

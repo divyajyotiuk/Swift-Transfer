@@ -136,9 +136,9 @@ public class User implements Serializable {
         linkedStatus =true;
     }
 
-    public void generateUserID(String Country, String name, String ph){
-        String lastname[] = name.split(" ");
-        userID = lastname[1] + "@" + Country + ph;
+    public void generateUserID(){
+        String lastname[] = fullName.split(" ");
+        userID = lastname[1] + "@" + country + phoneNo;
     }
 
 
