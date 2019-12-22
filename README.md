@@ -6,16 +6,10 @@ Including real-time currency conversion within the app. Prevent numerous Interna
 add to the cost of the transaction. 
 
 ### Screenshots
-![link](documents/ss1.jpg)
-![link](documents/ss2.jpg)
-![link](documents/ss3.jpg)
-![link](documents/ss4.jpg)
-![link](documents/ss5.jpg)
-![link](documents/ss6.jpg)
-![link](documents/ss7.jpg)
-![link](documents/ss8.jpg)
-![link](documents/ss9.jpg)
-![link](documents/ss10.jpg)
+<img src="documents/ss1.jpg" width="250"> <img src="documents/ss2.jpg" width="250"> <img src="documents/ss3.jpg" width="250">
+<img src="documents/ss4.jpg" width="250"> <img src="documents/ss5.jpg" width="250"> <img src="documents/ss6.jpg" width="250">
+<img src="documents/ss7.jpg" width="250"> <img src="documents/ss8.jpg" width="250"> <img src="documents/ss9.jpg" width="250">
+<img src="documents/ss10.jpg" width="250">
 
 ### Technology Stack
 - Android SDK
@@ -24,3 +18,5 @@ add to the cost of the transaction.
 - exchange-rate API
 - Remix IDE
 - Firebase
+
+<img src="documents/ss12.png">
