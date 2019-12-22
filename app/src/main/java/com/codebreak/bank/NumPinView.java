@@ -1,6 +1,7 @@
 package com.codebreak.bank;
 
 import android.content.Context;
+import android.content.res.TypedArray;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,6 +13,7 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 
 public class NumPinView extends ConstraintLayout implements View.OnClickListener {
 
+    private  final int COUNT;
     private TextView num1;
     private TextView num2;
     private TextView num3;
@@ -23,7 +25,7 @@ public class NumPinView extends ConstraintLayout implements View.OnClickListener
     private TextView num9;
     private TextView num0;
     private ImageButton delete;
-    int pin[] = new int[4];
+    int pin[] ;
     private boolean shouldDisablePin= false;
     private int count=0;
     private KeyListener listener;
@@ -39,6 +41,9 @@ public class NumPinView extends ConstraintLayout implements View.OnClickListener
     public NumPinView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         LayoutInflater.from(context).inflate(R.layout.layout_pin, this, true);
+        TypedArray attributes = context.obtainStyledAttributes(attrs, R.styleable.PinDotView);
+        COUNT = attributes.getInteger(R.styleable.PinDotView_dotCount,4);
+        pin= new int[COUNT];
         num0 = findViewById(R.id.num0);
         num1 = findViewById(R.id.num1);
         num2 = findViewById(R.id.num2);
@@ -77,7 +82,7 @@ public class NumPinView extends ConstraintLayout implements View.OnClickListener
 
     public void clearPin()
     {
-        pin = new int[4];
+        pin = new int[COUNT];
         count=0;
     }
 
@@ -92,7 +97,7 @@ public class NumPinView extends ConstraintLayout implements View.OnClickListener
                 count=0;
         }
 
-        if(count>=4)
+        if(count>=COUNT)
             return;
 
         switch (v.getId())

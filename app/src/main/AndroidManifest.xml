@@ -10,31 +10,30 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".TransactionHistoryActivity"></activity>
+        <activity android:name=".ProfileActivity">
+
+
+        </activity>
+        <activity android:name=".CheckBalanceActivity" />
+        <activity android:name=".PaymentPinActivity" />
+        <activity android:name=".SetPaymentPinActivity" />
+        <activity android:name=".ContractCall" />
+        <activity android:name=".CreateWallet" />
+        <activity android:name=".ImportWallet" />
+        <activity android:name=".TransactionHistoryActivity" />
         <activity android:name=".KYCActivity"></activity>
-        <activity android:name=".MainActivity">
-
-        </activity>
+        <activity android:name=".MainActivity" />
+        <activity android:name=".AddMoneyActivity" />
         <activity android:name=".SplashActivity">
-
-
-        </activity>
-        <activity android:name=".SendMoneyActivity" />
-        <activity android:name=".PinActivity">
-
-        </activity>
-<activity android:name=".SetPinActivity">
-
-</activity>
-
-        <activity android:name=".AddMoneyActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
+        <activity android:name=".SendMoneyActivity" />
+        <activity android:name=".PinActivity" />
+        <activity android:name=".SetPinActivity" />
     </application>
 
 </manifest>

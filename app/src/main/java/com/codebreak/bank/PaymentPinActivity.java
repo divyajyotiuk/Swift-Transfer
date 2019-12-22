@@ -1,6 +1,5 @@
 package com.codebreak.bank;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
@@ -20,18 +19,19 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
-public class PinActivity extends AppCompatActivity  implements NumPinView.KeyListener {
+public class PaymentPinActivity extends AppCompatActivity implements NumPinView.KeyListener {
+
     NumPinView numPinView;
 
-    TextView name;
     LoadingDots loadingDots;
     View root;
     PinDotView pinDotView;
+    private TextView name;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.fragment_set_pin);
+        setContentView(R.layout.activity_payment_pin);
         root = findViewById(android.R.id.content);
         numPinView = findViewById(R.id.num_pin_view);
         pinDotView = findViewById(R.id.pin_dot_view);
@@ -51,12 +51,11 @@ public class PinActivity extends AppCompatActivity  implements NumPinView.KeyLis
 
             }
         });
-
     }
 
     @Override
     public void onKeyPressed(int count) {
-        if(count==4)
+        if(count==6)
         {
             numPinView.setShouldDisablePin(true);
             pinDotView.setVisibility(View.GONE);
@@ -71,14 +70,15 @@ public class PinActivity extends AppCompatActivity  implements NumPinView.KeyLis
         FirebaseDatabase.getInstance().getReference().child("WUAccount").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                Snackbar.make(root,convertIntArrayToString(pin),Snackbar.LENGTH_SHORT).show();
 
-                if(dataSnapshot.child("loginPass").getValue().toString().equals(HashingAlgo.toHexString(convertIntArrayToString(pin).getBytes(StandardCharsets.UTF_8))))
+                if(dataSnapshot.child("paymentPin").getValue().toString().equals(HashingAlgo.toHexString(convertIntArrayToString(pin).getBytes(StandardCharsets.UTF_8))))
                 {
-                    startActivity(new Intent(PinActivity.this, MainActivity.class));
+                    setResult(RESULT_OK);
                     finish();
                 }
                 else {
-                    Snackbar.make(root,"Please enter correct PIN",Snackbar.LENGTH_SHORT).show();
+                    //Snackbar.make(root,"Please enter correct PIN",Snackbar.LENGTH_SHORT).show();
                     numPinView.setShouldDisablePin(false);
                     pinDotView.setVisibility(View.VISIBLE);
                     loadingDots.setVisibility(View.GONE);

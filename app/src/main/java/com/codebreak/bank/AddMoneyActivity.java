@@ -12,6 +12,7 @@ import android.widget.AutoCompleteTextView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.codebreak.bank.model.TxnList;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.textfield.TextInputEditText;
@@ -22,6 +23,9 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -46,6 +50,41 @@ public class AddMoneyActivity extends AppCompatActivity {
     TextView fromText;
     private ArrayAdapter<String> bankAdapter;
     private int selectedItem;
+    private DatabaseReference txnListRef;
+
+
+    public void writeTxnList(String senderName,
+                             String receiverName,
+                             String senderId,
+                             String receiverId,
+                             String senderKey,
+                             String receiverKey,
+                             Double initialAmount,
+                             String senderCurrency) {
+
+        String txnKey = txnListRef.child(senderKey).push().getKey();
+        TxnList tlist = new TxnList();
+        tlist.setReceiverName(receiverName);
+        tlist.setSenderName(senderName);
+        tlist.setInitialAmount(initialAmount);
+        tlist.setConvertedAmount(initialAmount);
+        tlist.setSenderCurrency(senderCurrency);
+        tlist.setReceiverCurrency(senderCurrency);
+        tlist.setFrom(senderId);
+        tlist.setTo(receiverId);
+        tlist.setTxnID(txnKey);
+        tlist.setTime(new SimpleDateFormat("HH:mm:ss").format(new Date()));
+        tlist.setDate(new SimpleDateFormat("yyyy-MM-dd").format(new Date()));
+        tlist.setMoneyAdded(false);
+        txnListRef.child(senderKey).child(txnKey).setValue(tlist);
+        tlist.setMoneyAdded(true);
+        txnListRef.child(receiverKey).child(txnKey).setValue(tlist);
+
+
+
+    }
+
+
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -53,7 +92,7 @@ public class AddMoneyActivity extends AppCompatActivity {
         setContentView(R.layout.activity_add_money);
         final Fade fade = new Fade();
 
-
+        txnListRef = FirebaseDatabase.getInstance().getReference("TxnList");
         FirebaseApp app = FirebaseApp.getInstance("secondary");
         // Get the database for the other app.
         secondaryDatabase = FirebaseDatabase.getInstance(app);
@@ -130,7 +169,16 @@ public class AddMoneyActivity extends AppCompatActivity {
                                             @Override
                                             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                                                 Double walletBalance  = Double.valueOf(dataSnapshot.child("walletBalance").getValue().toString());
+                                                String currency = dataSnapshot.child("currency").getValue().toString();
                                                 databaseReference.child(uid).child("walletBalance").setValue(walletBalance+enteredAmount);
+                                                writeTxnList(
+                                                        dataSnapshot.child("fullName").getValue().toString(),
+                                                        "From bank",
+                                                        "bank",
+                                                        dataSnapshot.child("userID").getValue().toString(),
+                                                        "bank", dataSnapshot.getKey(),
+                                                        enteredAmount,
+                                                        currency);
                                                 showSnackbar("Money added successfully");
                                                 hideProgress();
                                             }
@@ -163,8 +211,8 @@ public class AddMoneyActivity extends AppCompatActivity {
                 else {
                         primaryRef.addListenerForSingleValueEvent(new ValueEventListener() {
                             @Override
-                            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                                Double walletBalance  = Double.valueOf(dataSnapshot.child("walletBalance").getValue().toString());
+                            public void onDataChange(@NonNull DataSnapshot dataSnapshott) {
+                                Double walletBalance  = Double.valueOf(dataSnapshott.child("walletBalance").getValue().toString());
                                 final Double enteredAmount = Double.valueOf(amount.getText().toString());
                                 if(walletBalance>=enteredAmount)
                                 {
@@ -178,6 +226,17 @@ public class AddMoneyActivity extends AppCompatActivity {
                                                 {
                                                     Double bankBalance = Double.valueOf(dataSnapshot1.child("balance").getValue().toString());
                                                     secondaryRef.child(dataSnapshot1.getKey()).child("balance").setValue(Math.round((bankBalance+enteredAmount) * 100.0) / 100.0);
+                                                   String currency = dataSnapshott.child("currency").getValue().toString();
+                                                    writeTxnList("To bank",
+                                                            dataSnapshott.child("fullName").getValue().toString(),
+                                                            dataSnapshott.child("userID").getValue().toString(),
+                                                            "bank",
+                                                            dataSnapshott.getKey(),
+                                                            "bank",
+                                                            enteredAmount,
+                                                            currency
+
+                                                            );
                                                     showSnackbar("Money transferred to bank account successfully");
                                                     hideProgress();
 

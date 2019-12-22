@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <attr name="dotCount" format="integer"/>
+
+    <declare-styleable name="PinDotView">
+        <attr name="dotCount"/>
+    </declare-styleable>
+
+    <declare-styleable name="NumPinView">
+        <attr name="dotCount"/>
+    </declare-styleable>
+
+</resources>

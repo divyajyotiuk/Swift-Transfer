@@ -19,7 +19,7 @@ import java.nio.charset.StandardCharsets;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
-public class SetPinActivity extends AppCompatActivity {
+public class SetPaymentPinActivity extends AppCompatActivity {
 
     TextInputEditText etPin, etConfirmPin;
     Button done;
@@ -31,7 +31,7 @@ public class SetPinActivity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.fragment_change_pin);
+        setContentView(R.layout.activity_set_payment_pin);
         root = findViewById(android.R.id.content);
         etPin = findViewById(R.id.et_enter_pin);
         etConfirmPin = findViewById(R.id.et_confirm_pin);
@@ -50,8 +50,8 @@ public class SetPinActivity extends AppCompatActivity {
                     TransitionManager.beginDelayedTransition(progressRoot);
                     progressBar.setVisibility(View.VISIBLE);
                     done.setVisibility(View.INVISIBLE);
-                    mDatabase.child("loginPass").setValue(HashingAlgo.toHexString(etPin.getText().toString().getBytes(StandardCharsets.UTF_8)));
-                    Intent intent=new Intent(SetPinActivity.this, ImportWallet.class);
+                    mDatabase.child("paymentPin").setValue(HashingAlgo.toHexString(etPin.getText().toString().getBytes(StandardCharsets.UTF_8)));
+                    Intent intent=new Intent(SetPaymentPinActivity.this, MainActivity.class);
                     startActivity(intent);
                     finish();
                 }

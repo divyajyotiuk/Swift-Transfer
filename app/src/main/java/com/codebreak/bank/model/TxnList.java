@@ -1,14 +1,50 @@
 package com.codebreak.bank.model;
 
-import com.google.firebase.database.Exclude;
-
-import java.util.HashMap;
-import java.util.Map;
-
 public class TxnList {
 
-    private String to,from,date,time,txnID,currency, senderName, receiverName;
-    private Double amount;
+    private String to;
+    private String from;
+    private String date;
+    private String time;
+    private String txnID;
+
+    public String getSenderCurrency() {
+        return senderCurrency;
+    }
+
+    public void setSenderCurrency(String senderCurrency) {
+        this.senderCurrency = senderCurrency;
+    }
+
+    public String getReceiverCurrency() {
+        return receiverCurrency;
+    }
+
+    public void setReceiverCurrency(String receiverCurrency) {
+        this.receiverCurrency = receiverCurrency;
+    }
+
+    public Double getConvertedAmount() {
+        return convertedAmount;
+    }
+
+    public void setConvertedAmount(Double convertedAmount) {
+        this.convertedAmount = convertedAmount;
+    }
+
+    public Double getInitialAmount() {
+        return initialAmount;
+    }
+
+    public void setInitialAmount(Double initialAmount) {
+        this.initialAmount = initialAmount;
+    }
+
+    private String senderCurrency;
+    private String receiverCurrency;
+    private String senderName;
+    private String receiverName;
+    private Double convertedAmount, initialAmount;
     private boolean moneyAdded;
 
     public String getTo() {
@@ -51,36 +87,11 @@ public class TxnList {
         this.txnID = txnID;
     }
 
-    public String getCurrency() {
-        return currency;
-    }
 
-    public void setCurrency(String currency) {
-        this.currency = currency;
-    }
 
-    public Double getAmount() {
-        return amount;
-    }
 
-    public void setAmount(Double amount) {
-        this.amount = amount;
-    }
 
-    @Exclude
-    public Map<String, Object> toMap() {
-        HashMap<String, Object> result = new HashMap<>();
 
-        result.put("to",to);
-        result.put("from",from);
-        result.put("currency",currency);
-        result.put("txnID",txnID);
-        result.put("date",date);
-        result.put("time",time);
-        result.put("amount",amount);
-
-        return result;
-    }
 
     public boolean isMoneyAdded() {
         return moneyAdded;

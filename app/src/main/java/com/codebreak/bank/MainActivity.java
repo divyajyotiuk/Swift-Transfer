@@ -2,7 +2,6 @@ package com.codebreak.bank;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -15,14 +14,17 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 public class MainActivity extends AppCompatActivity {
+    private static final int REQUEST_PIN = 250;
 
-String uid;
-    MaterialCardView sendMoney, addMoney, checkBalance, transactionHistory;
+    String uid;
+    MaterialCardView sendMoney, addMoney, checkBalance, transactionHistory, logOut;
     Button done;
     TextView balance, name;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,19 +36,25 @@ String uid;
         uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
         checkBalance = findViewById(R.id.card_wallet_balance);
         transactionHistory = findViewById(R.id.card_transaction_history);
-        transactionHistory.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent myIntent = new Intent(MainActivity.this, TransactionHistoryActivity.class);
-                startActivity(myIntent);
-            }
+        logOut = findViewById(R.id.card_log_out);
+        logOut.setOnClickListener(v -> {
+            FirebaseAuth.getInstance().signOut();
+            startActivity(new Intent(MainActivity.this, SplashActivity.class));
+            finish();
+        });
+        transactionHistory.setOnClickListener(v -> {
+            Intent myIntent = new Intent(MainActivity.this, TransactionHistoryActivity.class);
+            startActivity(myIntent);
         });
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("WUAccount").child(uid);
 
         reference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                balance.setText(dataSnapshot.child("walletBalance").getValue().toString());
+
+                double amount = Math.round((Double.valueOf(dataSnapshot.child("walletBalance").getValue().toString())) * 100.0) / 100.0;
+
+                balance.setText(amount + " "+dataSnapshot.child("currency").getValue().toString());
                 name.setText(dataSnapshot.child("fullName").getValue().toString().split("\\s+")[0]);
             }
 
@@ -57,22 +65,28 @@ String uid;
         });
 
 
-        sendMoney.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent myIntent = new Intent(MainActivity.this, SendMoneyActivity.class);
-                startActivity(myIntent);
-            }
+        sendMoney.setOnClickListener(v -> {
+            Intent myIntent = new Intent(MainActivity.this, SendMoneyActivity.class);
+            startActivity(myIntent);
         });
-        addMoney.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+        addMoney.setOnClickListener(v -> {
+            Intent myIntent = new Intent(MainActivity.this, AddMoneyActivity.class);
+            startActivity(myIntent);
+        });
+        name.setOnClickListener(v -> {
+            Intent myIntent = new Intent(MainActivity.this, ProfileActivity .class);
+            startActivity(myIntent);
+        });
 
-            }
-        });
+        checkBalance.setOnClickListener(v -> startActivityForResult(new Intent(MainActivity.this, PaymentPinActivity.class), REQUEST_PIN));
     }
 
 
-
-
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == REQUEST_PIN && resultCode == RESULT_OK) {
+            Intent myIntent = new Intent(MainActivity.this, CheckBalanceActivity.class);
+            startActivity(myIntent);        }
+    }
 }

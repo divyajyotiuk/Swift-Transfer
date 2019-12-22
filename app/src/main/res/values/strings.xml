@@ -2,6 +2,19 @@
     <string name="app_name">Practice</string>
     <string name="quote">moving money for better</string>
 
+    <string-array name="usa_bank">
+        <item>BOA</item>
+        <item>BNY Mellon</item>
+        <item>Goldman Sachs</item>
+    </string-array>
+
+    <string-array name="uk_bank">
+        <item>Barclays</item>
+        <item>Standard Chartered</item>
+        <item>HSBC</item>
+    </string-array>
+
+
     <string-array name="bank">
         <item>HDFC</item>
         <item>SBI</item>
@@ -15,15 +28,38 @@
     </string-array>
 
 
-    <string-array name="id_proof">
+    <string-array name="india_id_proof">
         <item>Aadhar Card</item>
         <item>Pan Card</item>
         <item>Other</item>
+    </string-array>
+
+    <string-array name="us_id_proof">
+        <item>Social Security Number</item>
+        <item>Passport</item>
+        <item>Driver License</item>
+    </string-array>
+
+    <string-array name="uk_id_proof">
+        <item>National ID Card</item>
+        <item>Passport</item>
+        <item>Driver License</item>
     </string-array>
 
     <string-array name="add_money">
         <item>from bank</item>
         <item>to bank</item>
     </string-array>
+
+    <declare-styleable name="EditTextWithPrefix">
+        <attr name="prefix" format="string" />
+    </declare-styleable>
+
+    <string-array name="countries">
+        <item>USA</item>
+        <item>UK</item>
+        <item>India</item>
+    </string-array>
+
 
 </resources>

@@ -8,7 +8,15 @@
         <item name="colorAccent">@color/yellow_500</item>
         <item name="colorSurface">@color/surfaceColor</item>
     </style>
-
+    <style name="TopProgressBar" parent="@style/Widget.MaterialProgressBar.ProgressBar.Horizontal">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">4dp</item>
+        <item name="android:indeterminate">true</item>
+        <item name="android:visibility">invisible</item>
+        <item name="mpb_progressStyle">horizontal</item>
+        <item name="android:progressTint">?colorPrimary</item>
+        <item name="mpb_useIntrinsicPadding">false</item>
+    </style>
 
     <style name="NumPinText">
         <item name="android:background">?selectableItemBackgroundBorderless</item>

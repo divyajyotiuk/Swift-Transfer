@@ -1,6 +1,7 @@
 package com.codebreak.bank;
 
 import android.content.Context;
+import android.content.res.TypedArray;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
@@ -10,7 +11,8 @@ import android.view.View;
 import androidx.annotation.Nullable;
 
 public class PinDotView extends View {
-    private  final int COUNT=4;
+    private  final int COUNT;
+    private  int dotCount;
     private float dotWidth;
     private float strokeWidth;
     private float dotSize;
@@ -30,7 +32,9 @@ public class PinDotView extends View {
     public PinDotView(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         float density =context.getResources().getDisplayMetrics().density;
-        width = density*24*7;
+        TypedArray attributes = context.obtainStyledAttributes(attrs, R.styleable.PinDotView);
+        COUNT = attributes.getInteger(R.styleable.PinDotView_dotCount,4);
+        width = density*24*(2*COUNT-1);
         height = density*24;
         strokeWidth = density*2;
         y = Math.round(height/2);

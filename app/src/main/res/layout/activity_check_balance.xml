@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".CheckBalanceActivity">
+<androidx.appcompat.widget.Toolbar
+    android:theme="@style/ThemeOverlay.MaterialComponents.Light"
+    app:titleTextColor="@color/darkBackground"
+    app:layout_constraintTop_toTopOf="parent"
+    android:background="?colorPrimary"
+    android:id="@+id/toolbar"
+    app:title="View account balance"
+    android:layout_width="match_parent"
+    android:layout_height="?actionBarSize"/>
+
+    <ProgressBar
+        android:id="@+id/progress"
+        style="@style/Widget.AppCompat.ProgressBar"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar"
+        tools:visibility="visible" />
+
+    <TextView
+        android:layout_marginStart="16dp"
+        android:id="@+id/tv_total_balance"
+        android:layout_marginTop="24dp"
+        app:layout_constraintStart_toStartOf="parent"
+        android:text="Your account balance is"
+        android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle1"
+        app:layout_constraintTop_toBottomOf="@id/toolbar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+    <TextView
+        android:id="@+id/amount"
+        android:layout_marginStart="16dp"
+    android:layout_marginTop="8dp"
+    app:layout_constraintStart_toStartOf="parent"
+    tools:text="12345"
+    android:textAppearance="@style/TextAppearance.MaterialComponents.Headline5"
+    app:layout_constraintTop_toBottomOf="@id/tv_total_balance"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"/>
+    <TextView
+        android:id="@+id/currency"
+        android:layout_marginStart="4dp"
+        app:layout_constraintStart_toEndOf="@id/amount"
+        android:layout_marginTop="8dp"
+        tools:text="INR"
+        android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
+        app:layout_constraintBottom_toBottomOf="@id/amount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+</androidx.constraintlayout.widget.ConstraintLayout>

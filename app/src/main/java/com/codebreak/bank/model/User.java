@@ -137,8 +137,8 @@ public class User implements Serializable {
     }
 
     public void generateUserID(){
-        String lastname[] = fullName.split(" ");
-        userID = lastname[1] + "@" + country + phoneNo;
+//        String lastname[] = fullName.split(" ");
+        userID = phoneNo + "@" + country;
     }
 
 

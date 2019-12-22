@@ -96,12 +96,13 @@ public class SplashActivity extends AppCompatActivity {
                 // Sign in failed
                 if (response == null) {
                     // User pressed back button
-                    showSnackbar("User cancelled the operation.");
+                    finish();
                     return;
                 }
 
                 if (response.getError().getErrorCode() == ErrorCodes.NO_NETWORK) {
-                    showSnackbar("No internet connection.");
+                    Toast.makeText(this, "No internet connection.", Toast.LENGTH_SHORT).show();
+                    finish();
                     return;
                 }
 

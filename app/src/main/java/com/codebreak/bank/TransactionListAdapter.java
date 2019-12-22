@@ -24,19 +24,15 @@ public class TransactionListAdapter extends FirebaseRecyclerAdapter<TxnList, Tra
     private final int fontSize;
     private final int[] colors;
     private final Random rand;
-    /**
-     * Initialize a {@link RecyclerView.Adapter} that listens to a Firebase query. See
-     * {@link FirebaseRecyclerOptions} for configuration options.
-     *
-     * @param options
-     */
+    onClickListener listener;
 
     int greenColor, redColor;
-    public TransactionListAdapter(@NonNull FirebaseRecyclerOptions<TxnList> options, int fontSize, int[] colors) {
+    public TransactionListAdapter(@NonNull FirebaseRecyclerOptions<TxnList> options, int fontSize, int[] colors, onClickListener listener) {
         super(options);
         this.fontSize = fontSize;
         this.colors = colors;
-         rand = new Random();
+        this.listener = listener;
+        rand = new Random();
         redColor = Color.parseColor("#d50000");
         greenColor = Color.parseColor("#00842c");
     }
@@ -50,7 +46,7 @@ public class TransactionListAdapter extends FirebaseRecyclerAdapter<TxnList, Tra
         if(transaction.isMoneyAdded())
         {
             name = transaction.getReceiverName();
-            amount = String.format("+%s", transaction.getAmount());
+            amount = String.format("+%s "+transaction.getReceiverCurrency(), transaction.getConvertedAmount());
 
             transactionViewHolder.amount.setTextColor(greenColor);
 
@@ -59,7 +55,7 @@ public class TransactionListAdapter extends FirebaseRecyclerAdapter<TxnList, Tra
         {
             name = transaction.getSenderName();
             transactionViewHolder.amount.setTextColor(redColor);
-            amount = String.format("-%s", transaction.getAmount());
+            amount = String.format("-%s "+transaction.getSenderCurrency(), transaction.getInitialAmount());
         }
         transactionViewHolder.name.setText(name);
         transactionViewHolder.amount.setText(amount);
@@ -71,6 +67,15 @@ public class TransactionListAdapter extends FirebaseRecyclerAdapter<TxnList, Tra
                 .endConfig()
                 .buildRound(name.split(" ")[0].substring(0,1),colors[rand_int1]);
                 transactionViewHolder.avatar.setImageDrawable(drawable);
+                if(!transaction.getSenderCurrency().equals(transaction.getReceiverCurrency()))
+                {
+                    transactionViewHolder.itemView.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            listener.onClick(transaction.getTxnID());
+                        }
+                    });
+                }
     }
 
     @NonNull
@@ -91,5 +96,10 @@ public class TransactionListAdapter extends FirebaseRecyclerAdapter<TxnList, Tra
             date = itemView.findViewById(R.id.date);
             amount = itemView.findViewById(R.id.amount);
         }
+    }
+
+    public interface onClickListener
+    {
+        void onClick(String txnId);
     }
 }

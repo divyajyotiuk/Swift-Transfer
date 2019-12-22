@@ -6,7 +6,7 @@
     android:layout_height="match_parent">
 
     <com.codebreak.bank.NumPinView
-        app:dotCount="4"
+        app:dotCount="6"
         android:id="@+id/num_pin_view"
         app:layout_constraintBottom_toBottomOf="parent"
         android:layout_width="match_parent"
@@ -55,7 +55,7 @@
         app:LoadingDots_auto_play="true"
         android:layout_marginTop="32dp"
         app:LoadingDots_dots_color="@android:color/white"
-        app:LoadingDots_dots_count="4"
+        app:LoadingDots_dots_count="6"
         app:LoadingDots_dots_size="24dp"
         app:LoadingDots_dots_space="24dp"
         app:LoadingDots_loop_duration="600"
@@ -66,7 +66,7 @@
     <com.codebreak.bank.PinDotView
         android:id="@+id/pin_dot_view"
         android:layout_marginTop="56dp"
-        app:dotCount="4"
+        app:dotCount="6"
         app:layout_constraintTop_toBottomOf="@id/name"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
