@@ -37,8 +37,8 @@ public class ContractCall extends AppCompatActivity {
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
             // String address = extras.getString("address");
-            String address = "0x53D8C4d0a0dDD9faC8f5D1ab33E8e1673d9481Da"; //display address too along with balance
-            String privateKey = "198ccd740c0b57fc8bcb25d544683684aebb1425738fe580a4fa6e0d8ed85f79";
+            String address = ""; //display address too along with balance
+            String privateKey = "";
             //  String privateKey = extras.getString("privateKey");
 
 

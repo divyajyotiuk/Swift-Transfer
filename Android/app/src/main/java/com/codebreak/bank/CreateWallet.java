@@ -33,7 +33,7 @@ public class CreateWallet extends AppCompatActivity {
         privateView = findViewById(R.id.private_key);
         List<String> netIds = new ArrayList<>();
         netIds.add(PocketEth.Networks.RINKEBY.getNetID());
-        this.pocketEth = new PocketEth(this,"DEVfF1RpqCPbm1X96qDAb85", netIds,5,50000,"4");
+        this.pocketEth = new PocketEth(this,"", netIds,5,50000,"4");
         wallet = this.pocketEth.getRinkeby().createWallet();
         publicView.setText(wallet.getAddress());
         privateView.setText(wallet.getPrivateKey());
